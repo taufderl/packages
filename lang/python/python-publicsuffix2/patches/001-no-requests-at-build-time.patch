@@ -1,0 +1,23 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Tim auf der Landwehr <tadl-git@taufderl.de>
+Date: Sun, 26 Oct 2026 00:00:00 +0000
+Subject: [PATCH] setup.py: drop the build-time dependency on requests
+
+requests is only used by the optional "update" command that downloads a
+fresh public suffix list; the sdist already ships the list, so it is not
+needed to build the package. Not submitted upstream: publicsuffix2 is
+effectively unmaintained.
+
+Signed-off-by: Tim auf der Landwehr <tadl-git@taufderl.de>
+--- a/setup.py
++++ b/setup.py
+@@ -96,9 +96,6 @@ setup(
+     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
+     include_package_data=True,
+     zip_safe=False,
+-    setup_requires = [
+-        'requests >= 2.7.0',
+-    ],
+     classifiers=[
+         'Intended Audience :: Developers',
+         'License :: OSI Approved :: MIT License',
